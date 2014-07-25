@@ -35,7 +35,7 @@ call unite#util#set_default('g:unite_source_historia_command_file',
 let s:historia_file_mtime = 0
 
 function! unite#sources#historia#define() "{{{
-    return s:source
+    return [s:source, s:source_command_new]
 endfunction "}}}
 
 let s:source = {
@@ -99,7 +99,7 @@ function! s:load()  "{{{
 endfunction "}}}
 
 let s:source_command_new = {
-\   "name" : "command/new",
+\   "name" : "historia/new",
 \}
 
 function! s:source_command_new.change_candidates(args, context)
@@ -113,8 +113,6 @@ function! s:source_command_new.change_candidates(args, context)
 \       "action__command" : word,
 \   }]
 endfunction
-
-call unite#define_source(s:source_command_new)
 
 " Restore 'cpoptions' {{{
 let &cpo = s:save_cpo
